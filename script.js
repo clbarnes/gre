@@ -1,13 +1,13 @@
-var wordList = WORD_LIST;
-
 var UNKNOWN = '????????';
+var WORDLIST_URL = 'https://raw.githubusercontent.com/clbarnes/gre_scraper/json/wordList.json'
+var wordList = [{word: UNKNOWN, definition: UNKNOWN, usage: UNKNOWN}];
 
-var currentPair = {word: UNKNOWN, definition: UNKNOWN};
+var currentData = wordList[0];
 
 var randomPair = function() {
     var pair = wordList[Math.floor(Math.random()*wordList.length)];
-    currentPair = {word: pair.word, definition: pair.definition};
-    return currentPair;
+    currentData = {word: pair.word, definition: pair.definition};
+    return currentData;
 };
 
 var nextQuestion = function() {
@@ -22,11 +22,17 @@ var nextQuestion = function() {
 };
 
 var showAnswer = function() {
-    $('#wordText').text(currentPair.word);
-    $('#definitionText').text(currentPair.definition);
+    $('#wordText').text(currentData.word);
+    $('#definitionText').text(currentData.definition);
 };
 
 $('#showButton').click(showAnswer);
 $('#nextButton').click(nextQuestion);
 
 nextQuestion();
+
+$.get(WORDLIST_URL, function(data) {
+    wordList = data;
+    $('h2').hide();
+    nextQuestion();
+});
