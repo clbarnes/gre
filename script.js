@@ -32,7 +32,7 @@ $('#nextButton').click(nextQuestion);
 nextQuestion();
 
 $.get(WORDLIST_URL, function(data) {
-    wordList = data;
+    wordList = JSON.parse(data);
     $('h2').hide();
     nextQuestion();
 });
