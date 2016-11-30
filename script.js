@@ -1,12 +1,11 @@
 var UNKNOWN = '????????';
 var WORDLIST_URL = 'https://raw.githubusercontent.com/clbarnes/gre_scraper/json/wordList.json'
-var wordList = [{word: UNKNOWN, definition: UNKNOWN, usage: UNKNOWN}];
+var wordList = [{word: UNKNOWN, definition: UNKNOWN, usages: []}];
 
 var currentData = wordList[0];
 
 var randomPair = function() {
-    var pair = wordList[Math.floor(Math.random()*wordList.length)];
-    currentData = {word: pair.word, definition: pair.definition};
+    currentData =  wordList[Math.floor(Math.random()*wordList.length)];
     return currentData;
 };
 
